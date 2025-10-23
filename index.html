@@ -19,6 +19,8 @@
       align-items: center;
       min-height: 100vh;
       text-align: center;
+      letter-spacing: 0.2px;
+      font-weight: 300;
     }
     header {
       display: flex;
@@ -34,8 +36,11 @@
       color: #777;
     }
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       margin-bottom: 0.5rem;
+      color: #ddd;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
     a {
       color: #0066cc;
@@ -44,22 +49,31 @@
     a:hover {
       text-decoration: underline;
     }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding-top: 3rem;
+      padding-bottom: 2.5rem;
+    }
   </style>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="icon" type="image/png" href="/images/frv_favicon.png" sizes="32x32">
 </head>
 <body>
-  <header>
-    <h1>Front Room Ventures</h1>
-    <div style="margin-top: 1.5rem; font-size: 0.85rem; color: #777;">
-      We're under construction. Please check back for an update soon.
-    </div>
-  </header>
-  <footer>
-    <p>
-      Digital lab of Mati Kos.<br>
-      Building systems, tools, and stories worth shipping.<br>
-      Say hi: <a href="mailto:mati@frontroomventures.com">mati@frontroomventures.com</a>
+
+  <main>
+    <img src="images/frv-logo.png" alt="Front Room Ventures Logo" style="width: 220px; height: auto; margin: 2.5rem 0 2rem;" />
+    <!-- <hr style="width: 200px; border: none; border-top: 1px solid #444; margin: 2rem 0;" /> -->
+    <p style="font-size: 16px; color: #aaa; font-weight: 300; margin: 0 0 0.8rem;">
+      Digital lab of Mati Kos – building systems, tools, and stories worth shipping.
     </p>
-  </footer>
+    <p style="font-size: 14px; color: #666; line-height: 1.5;">
+      We’re under construction. Please check back soon.<br />
+      Contact: <a href="mailto:mati@frontroomventures.com" style="color: #358bd6;">mati@frontroomventures.com</a>
+    </p>
+    <img src="/images/frv-favicon.png" width="32" height="32" />
+  </main>
+
 </body>
 </html>
