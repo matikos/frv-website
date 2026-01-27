@@ -1,258 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front Room Ventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #1e1e1e; 
-            --grid: rgba(255, 255, 255, 0.02);
-            --text: #d1d1d1;
-            --logo-blue: #3b95ff;
-            --muted: #666;
-        }
-
-        body {
-            background-color: var(--bg);
-            background-image: 
-                linear-gradient(var(--grid) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .lab-container {
-            max-width: 1100px;
-            width: 100%;
-            padding: 40px 60px;
-            position: relative;
-        }
-
-        header {
-            margin-bottom: 60px;
-        }
-
-        .logo-main {
-            width: 180px;
-            height: auto;
-            display: block;
-            transition: all 0.3s ease; /* For smooth transitions */
-        }
-
-        .lab-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--muted);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 20px;
-        }
-
-        .hero {
-            max-width: 800px;
-            margin-bottom: 60px;
-        }
-
-        .headline {
-            font-size: 2.0rem;
-            font-weight: 300;
-            line-height: 1.2;
-            color: #fff;
-            margin: 0;
-        }
-
-        .capabilities {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            border-top: 1px solid var(--grid);
-            padding-top: 40px;
-        }
-
-        .cap-item {
-            border: 1px solid transparent;
-            border-radius: 8px;
-            padding: 15px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .cap-item:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .cap-item h3 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--logo-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .cap-item p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #999;
-            margin: 0;
-        }
-
-        footer {
-            margin-top: 80px;
-            padding-top: 30px;
-            border-top: 1px solid var(--grid);
-        }
-
-        .contact-link {
-            font-family: 'JetBrains Mono', monospace;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--logo-blue);
-            padding-bottom: 4px;
-            transition: color 0.3s ease;
-        }
-
-        /* Animations */
-        @keyframes soft-glow {
-            0% { filter: drop-shadow(0 0 0 rgba(59, 149, 255, 0)); }
-            50% { filter: drop-shadow(0 0 12px rgba(59, 149, 255, 0.5)); }
-            100% { filter: drop-shadow(0 0 0 rgba(59, 149, 255, 0)); }
-        }
-
-        @keyframes link-glow {
-            0%, 100% {
-                color: #fff;
-                text-shadow: 0 0 15px rgba(59, 149, 255, 0.7);
-            }
-            50% {
-                color: #fff;
-                text-shadow: 0 0 30px rgba(59, 149, 255, 1);
-            }
-        }
-
-        /* Desktop-specific interactions */
-        @media (min-width: 769px) {
-            .lab-container:has(.contact-link:hover) .logo-main {
-                animation: soft-glow 1.5s ease-out;
-            }
-            .contact-link:hover {
-                color: var(--logo-blue);
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .lab-container:has(.contact-link:hover) .logo-main,
-            .cap-item,
-            .contact-link {
-                animation: none;
-                transition: none;
-            }
-            .cap-item:hover {
-                background-color: transparent;
-                border-color: transparent;
-            }
-        }
-
-        /* Tablet and below */
-        @media (max-width: 768px) {
-            .lab-container {
-                padding: 50px 40px;
-            }
-            .headline {
-                font-size: 1.8rem;
-            }
-            .capabilities {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-             header {
-                margin-bottom: 50px;
-            }
-            .hero {
-                margin-bottom: 50px;
-            }
-            footer {
-                margin-top: 60px;
-            }
-            /* On smaller screens, make the link glow instead of the logo */
-            .contact-link:hover,
-            .contact-link:active {
-                animation: link-glow 2s ease-in-out infinite;
-            }
-        }
-
-        /* Smartphone */
-        @media (max-width: 480px) {
-            .lab-container {
-                padding: 40px 20px;
-            }
-            .headline {
-                font-size: 1.5rem;
-            }
-            .logo-main {
-                width: 150px;
-            }
-            .lab-tag {
-                font-size: 0.6rem;
-            }
-            .capabilities {
-                gap: 20px;
-            }
-            .cap-item p {
-                font-size: 0.9rem;
-            }
-             .contact-link {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Front Room Ventures – Digital Lab</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- You can create this later -->
+  <style>
+    body {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background-color: #1e1e1e;
+      color: #ccc;
+      margin: 0;
+      padding: 0 1rem;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      letter-spacing: 0.2px;
+      font-weight: 300;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex-direction: column;
+    }
+    footer {
+      max-width: 600px;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    h1 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+      color: #ddd;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding-top: 3rem;
+      padding-bottom: 2.5rem;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="/images/frv_favicon.png" sizes="32x32">
 </head>
 <body>
 
-<div class="lab-container">
-    <header>
-        <img src="https://frontroomventures.com/images/frv-logo.png" alt="Front Room Ventures Logo" class="logo-main">
-        <div class="lab-tag">Digital Lab // Mati Kos</div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h2 class="headline">building systems, tools, and stories worth shipping</h2>
-        </section>
-
-        <section class="capabilities">
-            <div class="cap-item">
-                <h3>Workflow Untangling</h3>
-                <p>Bringing order to projects that have become overloaded or undefined.</p>
-            </div>
-            <div class="cap-item">
-                <h3>System Mapping</h3>
-                <p>Finding structural clarity when the way forward is messy or uncertain.</p>
-            </div>
-            <div class="cap-item">
-                <h3>Tool Building</h3>
-                <p>Creating functional, digital solutions that fit a specific human mission.</p>
-            </div>
-            <div class="cap-item">
-                <h3>AI-Assisted Flows</h3>
-                <p>Designing modern systems that augment capability without losing the human touch.</p>
-            </div>
-        </section>
-
-        <footer>
-            <a href="mailto:mati@frontroomventures.com" class="contact-link">Let’s start something together</a>
-        </footer>
-    </main>
-</div>
+  <main>
+    <img src="images/frv-logo.png" alt="Front Room Ventures Logo" style="width: 220px; height: auto; margin: 2.5rem 0 2rem;" />
+    <!-- <hr style="width: 200px; border: none; border-top: 1px solid #444; margin: 2rem 0;" /> -->
+    <p style="font-size: 16px; color: #aaa; font-weight: 300; margin: 0 0 0.8rem;">
+      Digital lab of Mati Kos – building systems, tools, and stories worth shipping.
+    </p>
+    <p style="font-size: 14px; color: #666; line-height: 1.5;">
+      We’re under construction. Please check back soon.<br />
+      Contact: <a href="mailto:mati@frontroomventures.com" style="color: #358bd6;">mati@frontroomventures.com</a>
+    </p>
+    <img src="/images/frv-favicon.png" width="32" height="32" />
+  </main>
 
 </body>
 </html>
