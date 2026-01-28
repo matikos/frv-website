@@ -4,8 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const logo = document.querySelector('.logo-main');
     const contactLink = document.querySelector('.contact-link');
     const capabilityItems = document.querySelectorAll('.cap-item');
+    const mainContent = document.querySelector('main');
 
     const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    const resetCapabilityItems = () => {
+        capabilityItems.forEach(item => {
+            item.classList.remove('is-active');
+            item.classList.remove('item-blur');
+        });
+    };
 
     // 1. Trigger page-load animations
     body.classList.add('is-loading');
@@ -25,16 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Universal click/tap interaction to blur other items
     capabilityItems.forEach(tappedItem => {
-        tappedItem.addEventListener('click', () => {
+        tappedItem.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent the click from bubbling up to the main content
             const isActive = tappedItem.classList.contains('is-active');
+            
+            resetCapabilityItems();
 
-            // First, reset all items
-            capabilityItems.forEach(item => {
-                item.classList.remove('is-active');
-                item.classList.remove('item-blur');
-            });
-
-            // If the tapped item was not already active, activate it and blur others
             if (!isActive) {
                 tappedItem.classList.add('is-active');
                 capabilityItems.forEach(item => {
@@ -45,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    
+    // Add a listener to the main content area to reset items when clicking outside
+    mainContent.addEventListener('click', resetCapabilityItems);
 
     // 4. Desktop-only hover glow
     if (!isTouchDevice()) {
@@ -62,13 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => logo.classList.remove('glow-once'), 1700);
         });
 
-        // Logo press-and-hold: persistent glow
-        logo.addEventListener('touchstart', () => logo.classList.add('glow-hold'), { passive: true });
-        logo.addEventListener('touchend', () => logo.classList.remove('glow-hold'));
-
-        // Press-and-hold a capability item to scale it
+        // Press-and-hold a capability item to scale it (FIXED)
         capabilityItems.forEach(item => {
-            item.addEventListener('touchstart', () => item.classList.add('is-pressed'), { passive: true });
+            item.addEventListener('touchstart', () => item.classList.add('is-pressed'));
             item.addEventListener('touchend', () => item.classList.remove('is-pressed'));
         });
     }

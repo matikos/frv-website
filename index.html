@@ -41,10 +41,6 @@
             transition: filter 0.4s ease-in-out;
         }
 
-        .section-blur { 
-            filter: blur(2px) brightness(0.9);
-        }
-
         header {
             margin-bottom: 60px;
         }
@@ -93,7 +89,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: background-color 0.3s ease, border-color 0.3s ease, 
-                        opacity 0.6s ease-out, transform 0.3s ease-out;
+                        opacity 0.4s ease-out, transform 0.3s ease-out, filter 0.4s ease-in-out;
         }
 
         .cap-item.is-visible {
@@ -104,6 +100,17 @@
         .cap-item.is-pressed {
             transform: scale(1.04);
             background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .cap-item.is-active {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .cap-item.item-blur {
+            filter: blur(2px);
+            opacity: 0.5;
         }
 
         .cap-item:nth-child(2).is-visible { transition-delay: 0.1s; }
@@ -167,10 +174,6 @@
         @keyframes temporary-glow {
             0%, 100% { filter: drop-shadow(0 0 0 rgba(59, 149, 255, 0)); }
             50% { filter: drop-shadow(0 0 12px var(--logo-blue)); }
-        }
-
-        .logo-main.glow-hold {
-             filter: drop-shadow(0 0 12px var(--logo-blue));
         }
 
         /* JS-controlled animation classes */

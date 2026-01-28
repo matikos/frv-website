@@ -12,12 +12,19 @@ This document outlines the design and features of the Interactive Digital Lab, a
 *   **Responsive Design:** Adapts to different screen sizes.
 *   **Modern Aesthetics:** Dark theme, grid background, and modern typography.
 *   **Component-based Structure:** Organized into logical sections.
-*   **Robust Animations:** Page-load, hover, scroll, and touch-specific effects are managed by JavaScript.
+*   **Robust Animations:** Page-load, hover, and scroll effects are managed by JavaScript.
 
-### Current Plan: Unified "Focus" Interaction for Capabilities
+### Current Plan: Bug Fixes and Interaction Polish
 
-*   **Goal:** Unify the focus interaction across all devices. Clicking (on desktop) or tapping (on mobile) a capability item will now cause all *other* capability items to blur, leaving the selected one in focus. Clicking/tapping the item again resets the view.
+*   **Goal:** Address bugs reported from the last deployment and improve user interactions based on feedback.
 *   **Implementation Steps:**
-    1.  **JavaScript (`main.js`):**
-        *   **Refactor Logic:** The `click` event listener for the `.cap-item` elements will be moved out of the `if (isTouchDevice())` block.
-        *   **Universal Application:** This makes the blur/focus toggle behavior available for both mouse clicks on desktop and taps on touch devices, creating a consistent user experience.
+    1.  **Fix Universal Blur Effect:**
+        *   **JavaScript (`main.js`):** The `click` listener for blurring capability items will be maintained for universal desktop/mobile use. 
+        *   **Add "Click Outside" Reset:** A new event listener will be added to the main content area. If the user clicks outside of a capability item, any active blur effect will be reset. This improves usability and prevents items from getting "stuck" in a blurred state.
+
+    2.  **Fix Mobile Scaling Effect:**
+        *   **JavaScript (`main.js`):** The `touchstart` event listener for the press-and-hold scaling effect will be modified. The `{ passive: true }` option will be removed to ensure the event is handled correctly for all capability items, especially those at the bottom of the viewport.
+
+    3.  **Remove Persistent Glow Effect:**
+        *   **JavaScript (`main.js`):** The `touchstart` and `touchend` event listeners that add/remove the `.glow-hold` class from the logo will be deleted.
+        *   **CSS (`index.html`):** The `.logo-main.glow-hold` CSS rule will be deleted.
