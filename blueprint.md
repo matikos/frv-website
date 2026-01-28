@@ -14,14 +14,10 @@ This document outlines the design and features of the Interactive Digital Lab, a
 *   **Component-based Structure:** Organized into logical sections.
 *   **Robust Animations:** Page-load, hover, scroll, and touch-specific effects are managed by JavaScript.
 
-### Current Plan: Sophisticated Headline Responsiveness
+### Current Plan: Unified "Focus" Interaction for Capabilities
 
-*   **Goal:** Implement a truly responsive headline that stays on one line when space allows, and only breaks at a specific point when the screen narrows. When it breaks, the line spacing will be increased for readability.
+*   **Goal:** Unify the focus interaction across all devices. Clicking (on desktop) or tapping (on mobile) a capability item will now cause all *other* capability items to blur, leaving the selected one in focus. Clicking/tapping the item again resets the view.
 *   **Implementation Steps:**
-    1.  **HTML (`index.html`):**
-        *   The headline HTML is already correct, with the second part wrapped in a `<span>`.
-
-    2.  **CSS (`index.html`):**
-        *   **Conditional Line Break:**
-            *   Inside a media query for screens with a width of `870px` or less (`@media (max-width: 870px)`), set the headline's `<span>` to `display: block` to force the line break.
-            *   In the same media query, increase the `line-height` of the `.headline` to `1.4` to add space between the two stacked lines.
+    1.  **JavaScript (`main.js`):**
+        *   **Refactor Logic:** The `click` event listener for the `.cap-item` elements will be moved out of the `if (isTouchDevice())` block.
+        *   **Universal Application:** This makes the blur/focus toggle behavior available for both mouse clicks on desktop and taps on touch devices, creating a consistent user experience.

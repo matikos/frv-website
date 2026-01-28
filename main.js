@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const logo = document.querySelector('.logo-main');
     const contactLink = document.querySelector('.contact-link');
-    const capabilitiesSection = document.querySelector('.capabilities');
     const capabilityItems = document.querySelectorAll('.cap-item');
-    const otherSections = [document.querySelector('header'), document.querySelector('.hero'), document.querySelector('footer')];
 
     const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -25,7 +23,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     capabilityItems.forEach(item => observer.observe(item));
 
-    // 3. Desktop-only hover glow
+    // 3. Universal click/tap interaction to blur other items
+    capabilityItems.forEach(tappedItem => {
+        tappedItem.addEventListener('click', () => {
+            const isActive = tappedItem.classList.contains('is-active');
+
+            // First, reset all items
+            capabilityItems.forEach(item => {
+                item.classList.remove('is-active');
+                item.classList.remove('item-blur');
+            });
+
+            // If the tapped item was not already active, activate it and blur others
+            if (!isActive) {
+                tappedItem.classList.add('is-active');
+                capabilityItems.forEach(item => {
+                    if (item !== tappedItem) {
+                        item.classList.add('item-blur');
+                    }
+                });
+            }
+        });
+    });
+
+    // 4. Desktop-only hover glow
     if (!isTouchDevice()) {
         contactLink.addEventListener('mouseenter', () => {
             logo.classList.add('glow-once');
@@ -33,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Touch-specific interactions
+    // 5. Touch-specific interactions
     if (isTouchDevice()) {
         // Logo tap: temporary glow
         logo.addEventListener('click', () => {
@@ -44,16 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Logo press-and-hold: persistent glow
         logo.addEventListener('touchstart', () => logo.classList.add('glow-hold'), { passive: true });
         logo.addEventListener('touchend', () => logo.classList.remove('glow-hold'));
-
-        // Tap capabilities section to blur others
-        if (capabilitiesSection) {
-            capabilitiesSection.addEventListener('click', () => {
-                const isBlurred = otherSections[0].classList.contains('section-blur');
-                otherSections.forEach(section => {
-                    section.classList.toggle('section-blur', !isBlurred);
-                });
-            });
-        }
 
         // Press-and-hold a capability item to scale it
         capabilityItems.forEach(item => {
